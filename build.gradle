@@ -1,9 +1,8 @@
 plugins {
 	id 'java'
+        id 'application'
         id 'checkstyle'
 }
-
-apply plugin: 'checkstyle'
 
 repositories {
 	mavenCentral()
@@ -20,15 +19,14 @@ test {
 	}
 }
 
-checkstyle {
-    // assign the latest checkstyle version explicitly
-    // default version is very old, likes 5.9
-    toolVersion = '8.32'
+application {
+    mainClassName = 'uk.ac.liverpool.comp122.week1.HelloJava'
+}
 
-    // checkstyle.xml copy from:
-    // https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-8.6/src/main/resources/google_checks.xml
-    // the version should be as same as plugin version
-    //configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+
+
+checkstyle {
+    toolVersion = '8.32'  // assign the latest checkstyle version explicitly
     showViolations = false
 }
 tasks.withType(Checkstyle) {
