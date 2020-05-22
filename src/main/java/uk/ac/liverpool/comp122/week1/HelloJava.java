@@ -1,6 +1,6 @@
-package com.example.project;
+package uk.ac.liverpool.comp122.week1;
 
-public class Hello {
+public class HelloJava {
 
 	public static void main(final String[] args) {
 		System.out.println("Not the right string, tests will fail!");
