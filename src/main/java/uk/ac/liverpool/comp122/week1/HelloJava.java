@@ -1,10 +1,10 @@
 package uk.ac.liverpool.comp122.week1;
 
 public class HelloJava {
+  public static void main(final String[] args) {
+    System.out.println("Hello Java!");
 
-	public static void main(final String[] args) {
-		System.out.println("Not the right string, tests will fail!");
-	}
 
+  }
 }
 
