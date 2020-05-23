@@ -1,8 +1,16 @@
-plugins {
-	id 'java'
-        id 'application'
-        id 'checkstyle'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.cs125-illinois:gradlegrader:2020.1.0'
+    }
 }
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'checkstyle'
+apply plugin: 'edu.illinois.cs.cs125.gradlegrader'
 
 repositories {
 	mavenCentral()
@@ -10,6 +18,8 @@ repositories {
 
 dependencies {
 	testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
+	testImplementation('com.github.cs125-illinois:gradlegrader:2020.1.0')
+        implementation('com.github.cs125-illinois:gradlegrader:2020.1.0')
 }
 
 test {
@@ -34,4 +44,36 @@ tasks.withType(Checkstyle) {
         xml.enabled true
         html.enabled false
     }
+}
+
+
+gradlegrader {
+    assignment 'Spring2019.MP0'
+    checkstyle {
+        points = 10
+        configFile = file('config/checkstyle/checkstyle.xml')
+        version = '8.32' // use the newest checkstyle version
+     }
+
+    identification {
+        txtFile = file('email.txt')
+        validate = { email -> email.endsWith('@liverpool.ac.uk') }
+    }
+    reporting {
+        jsonFile = file('grade.json')
+        post {
+            endpoint = "https://example.com/progress"
+        }
+        printPretty {
+            title = "MP0: Location"
+            notes = "Note that the maximum local grade is 90/100. 10 points will be awarded during " +
+                    "official grading if you have submitted code that earns at least 40 points by " +
+                    "Monday, May 20."
+        }
+    }
+    //subprojects project(':app'), project(':lib')
+    //vcs {
+    //    git = true
+    //    requireCommit = true
+    //}
 }
