@@ -25,7 +25,7 @@ public class TestHelloJava {
     HelloJava.main(null);
 
     // assertion
-    assertEquals("Hello Java!\n", bos.toString());
+    assertEquals("Hello Java!", bos.toString());
 
     // undo the binding in System
     System.setOut(originalOut);
