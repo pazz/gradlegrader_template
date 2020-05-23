@@ -1,0 +1,14 @@
+//https://github.com/cs125-illinois/gradlegrader/issues/2#issuecomment-632796678
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == "edu.illinois.cs.cs125" && requested.version != null) {
+                useModule("com.github.cs125-illinois:${requested.id.name}:${requested.version}")
+            }
+        }
+    }
+}

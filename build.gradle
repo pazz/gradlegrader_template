@@ -1,16 +1,9 @@
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.github.cs125-illinois:gradlegrader:2020.1.0'
-    }
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'edu.illinois.cs.cs125.gradlegrader' version '2020.1.0'
 }
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'checkstyle'
-apply plugin: 'edu.illinois.cs.cs125.gradlegrader'
 
 repositories {
 	mavenCentral()
