@@ -10,9 +10,9 @@ repositories {
 }
 
 dependencies {
-	testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
-	testImplementation('com.github.cs125-illinois:gradlegrader:2020.1.0')
-        implementation('com.github.cs125-illinois:gradlegrader:2020.1.0')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.6.2')
+    testImplementation('com.github.cs125-illinois:gradlegrader:2020.1.0')
+    testRuntimeOnly('com.github.cs125-illinois:gradlegrader:2020.1.0')
 }
 
 test {
@@ -29,7 +29,9 @@ application {
 
 
 checkstyle {
-    toolVersion = '8.32'  // assign the latest checkstyle version explicitly
+    // assign the latest checkstyle version explicitly to ensure compatibility
+    // with recent google_checks.xml
+    toolVersion = '8.32'
     showViolations = false
 }
 tasks.withType(Checkstyle) {
@@ -41,27 +43,26 @@ tasks.withType(Checkstyle) {
 
 
 gradlegrader {
-    assignment 'Spring2019.MP0'
+    assignment 'COMP122-2021 A1'
     checkstyle {
         points = 10
         configFile = file('config/checkstyle/checkstyle.xml')
         version = '8.32' // use the newest checkstyle version
      }
 
-    identification {
-        txtFile = file('email.txt')
-        validate = { email -> email.endsWith('@liverpool.ac.uk') }
-    }
+    //identification {
+    //    txtFile = file('email.txt')
+    //    validate = { email -> email.endsWith('@liverpool.ac.uk') }
+    //}
     reporting {
         jsonFile = file('grade.json')
         post {
             endpoint = "https://example.com/progress"
         }
         printPretty {
-            title = "MP0: Location"
+            title = "COMP122 A1"
             notes = "Note that the maximum local grade is 90/100. 10 points will be awarded during " +
-                    "official grading if you have submitted code that earns at least 40 points by " +
-                    "Monday, May 20."
+                    "official grading if you have submitted code that earns at least 40 points."
         }
     }
     //subprojects project(':app'), project(':lib')
